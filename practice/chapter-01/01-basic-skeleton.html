@@ -4,7 +4,8 @@
 
 <head>
     <title>Example 01.01 - Basic skeleton</title>
-    <script type="text/javascript" src="../../libs/three.js"></script>
+    <script type="text/javascript" src="../../libs/three81.js"></script>
+    <script type="text/javascript" src="../../libs/stats.js"></script>
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to
@@ -16,7 +17,8 @@
 </head>
 
 <body>
-
+    <div id="Stats-output">
+    </div>
     <!-- Div which will hold the Output -->
     <div id="WebGL-output">
     </div>
@@ -27,6 +29,7 @@
     // once everything is loaded, we run our Three.js stuff.
     // here we'll put the Three.js stuff
         function init() {
+            initStats();
             //シーンの作成
             var scene = new THREE.Scene();
             
@@ -41,6 +44,7 @@
             var renderer = new THREE.WebGLRenderer();
             renderer.setClearColor(new THREE.Color(0xEEEEEE));
             renderer.setSize(window.innerWidth,window.innerHeight);
+            renderer.shadowMap.enabled = true;
 
             //axesの作成
             var axis = new THREE.AxisHelper(20);
@@ -57,6 +61,7 @@
             plane.position.x = 15;
             plane.position.y = 0;
             plane.position.z = 0;
+            plane.receiveShadow = true;
 
             scene.add(plane);
 
@@ -68,6 +73,7 @@
             cube.position.x = -4;
             cube.position.y = 3;
             cube.position.z = 0;
+            cube.castShadow = true;
 
             scene.add(cube);
 
@@ -79,19 +85,37 @@
             sphere.position.x = 20;
             sphere.position.y = 3;
             sphere.position.z = 2;
+            sphere.castShadow = true;
 
             scene.add(sphere);
 
             //スポットライトを当てます
             var spotLight = new THREE.SpotLight(0xffffff);
-            spotLight.position.set(-20,30,-5);
+            spotLight.position.set(-40,60,-10);
+            spotLight.castShadow = true;
+
             scene.add(spotLight);
 
             document.getElementById('WebGL-output').appendChild(renderer.domElement);
-            renderer.render(scene,camera)
+            rendererScene();
+
+            function rendererScene () {
+                //stats.update();
+                requestAnimationFrame(rendererScene);
+                renderer.render(scene,camera)
+            }
+            function initStats() {
+                var stats = new Stats;
+                stats.setMode(0);
+                stats.domElement.style.position = 'absolute';
+                stats.domElement.style.left = '0px';
+                stats.domElement.style.top = '0px';
+
+                document.getElementById('Stats-output').appendChild(stats.domElement);
+                return stats;
+            }
         }
-    
-    window.onload = init
+        window.onload = init;
 
 </script>
 </body>
