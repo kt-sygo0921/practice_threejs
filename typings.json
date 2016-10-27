@@ -2,6 +2,7 @@
   "name": "mysite",
   "dependencies": {},
   "globalDependencies": {
+    "require": "registry:dt/require#2.1.20+20160919185614",
     "three": "registry:dt/three#0.0.0+20161004170959"
   }
 }

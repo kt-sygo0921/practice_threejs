@@ -19,4 +19,7 @@ gulp.task('watch',function(){
 	// gulp.watch('./app/js/es6/**/*.js', function(){
 	// 	runSequance(['js'], ['babel'],  browserSync.reload)
 	// })
+	gulp.watch('./practice/ts/**/*.ts', function(){
+		runSequance(['ts'], browserSync.reload)
+	})
 });
