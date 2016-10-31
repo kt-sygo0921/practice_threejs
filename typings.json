@@ -2,7 +2,9 @@
   "name": "mysite",
   "dependencies": {},
   "globalDependencies": {
+    "dat-gui": "registry:dt/dat-gui#0.5.0+20160317120654",
     "require": "registry:dt/require#2.1.20+20160919185614",
+    "stats": "registry:dt/stats#0.16.0+20160505160752",
     "three": "registry:dt/three#0.0.0+20161004170959"
   }
 }
